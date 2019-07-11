@@ -51,7 +51,6 @@ var Engine = (function(global) {
          * for the next time this function is called.
          */
         lastTime = now;
-// console.log("here --- "+now);
         /* Use the browser's requestAnimationFrame function to call this
          * function again as soon as the browser is able to draw another frame.
          */

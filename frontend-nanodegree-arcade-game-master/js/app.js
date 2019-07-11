@@ -102,6 +102,7 @@ Player.prototype.checkForWall = function () {
   else if (this.y == 40) {
     alert("Yay!! You won!!");
     this.AtWall.topEnd = true;
+    this.resetPlayer();
   }
   else if (this.y == 400)
     this.AtWall.bottomEnd = true;
@@ -112,8 +113,13 @@ Player.prototype.resetPlayer = function () {
   this.y = 400;
 };
 
-Player.prototype.checkCollision = function(){
-
+Enemy.prototype.checkCollision = function(){
+var bugbox = {
+  bugtop : this.y+40,
+  bugbottom : this.y -40,
+  bugleft: this.x - 50,
+  bugright: this.x + 50
+}
 }
 
 // Now instantiate your objects.
