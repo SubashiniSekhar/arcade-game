@@ -29,6 +29,7 @@ Enemy.prototype.update = function (dt) {
     this.enemySpeed();
   }
 
+  this.checkCollision();
 };
 
 
@@ -74,38 +75,38 @@ Player.prototype.handleInput = function (keyInput) {
 Player.prototype.checkAndMovePlayer = function (direction) {
   var horizontalMove = 100;
   var verticalMove = 80;
-  console.log("mvoing the player in " + direction);
+  console.log("moving the player in " + direction);
   this.checkForWall();
-  if (this.AtWall.bottomEnd && direction === "down" ||
-    this.AtWall.leftEnd && direction === "left" ||
-    this.AtWall.rightEnd && direction === "right" ||
-    this.AtWall.topEnd && direction == "up") {
+  if (direction === 'left' && !this.AtWall.leftEnd) {
+    this.x -= horizontalMove;
+  }
+  else if (direction === 'right' && !this.AtWall.rightEnd) {
+    this.x += horizontalMove;
+  }
+  else if (direction === 'up' && !this.AtWall.topEnd) {
+    this.y -= verticalMove;
+  }
+  else if (direction === 'down' && !this.AtWall.bottomEnd) {
+    this.y += verticalMove;
+  }
+  else
     return null;
-  }
-
-  else {
-    if (direction === 'left')
-      this.x -= horizontalMove;
-    else if (direction === 'right')
-      this.x += horizontalMove;
-    else if (direction === 'up')
-      this.y -= verticalMove;
-    else if (direction === 'down')
-      this.y += verticalMove;
-  }
 }
 Player.prototype.checkForWall = function () {
-  if (this.x == 0)
+  if (this.x === 0) {
     this.AtWall.leftEnd = true;
-  else if (this.x == 400)
+  }
+  else if (this.x === 400) {
     this.AtWall.rightEnd = true;
-  else if (this.y == 40) {
+  }
+  else if (this.y <= 40) {
     alert("Yay!! You won!!");
     this.AtWall.topEnd = true;
     this.resetPlayer();
   }
-  else if (this.y == 400)
+  else if (this.y === 400) {
     this.AtWall.bottomEnd = true;
+  }
 }
 
 Player.prototype.resetPlayer = function () {
@@ -113,13 +114,19 @@ Player.prototype.resetPlayer = function () {
   this.y = 400;
 };
 
-Enemy.prototype.checkCollision = function(){
-var bugbox = {
-  bugtop : this.y+40,
-  bugbottom : this.y -40,
-  bugleft: this.x - 50,
-  bugright: this.x + 50
-}
+Enemy.prototype.checkCollision = function () {
+  var bugbox = {
+    bugtop: this.y + 40,
+    bugbottom: this.y - 40,
+    bugleft: this.x - 50,
+    bugright: this.x + 50
+  }
+
+  if (player.x > bugbox.bugleft && player.x < bugbox.bugright && player.y < bugbox.bugtop && player.y > bugbox.bugbottom) {
+    alert("Noooo !!! You Lost :(");
+    player.resetPlayer();
+
+  }
 }
 
 // Now instantiate your objects.
