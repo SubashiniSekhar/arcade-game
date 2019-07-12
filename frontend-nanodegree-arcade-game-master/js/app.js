@@ -71,6 +71,10 @@ Player.prototype.render = function () {
 Player.prototype.handleInput = function (keyInput) {
   this.checkAndMovePlayer(keyInput);
 };
+/*
+*If the player is pressing left arrow and he is not at the left wall, move him in left
+* Repeat for all the directions
+* */
 
 Player.prototype.checkAndMovePlayer = function (direction) {
   var horizontalMove = 100;
@@ -92,6 +96,9 @@ Player.prototype.checkAndMovePlayer = function (direction) {
   else
     return null;
 }
+/*
+* Check for the player's current position with respect to the walls
+* */
 Player.prototype.checkForWall = function () {
   if (this.x === 0) {
     this.AtWall.leftEnd = true;
@@ -113,7 +120,10 @@ Player.prototype.resetPlayer = function () {
   this.x = 200;
   this.y = 400;
 };
-
+/*
+*Draw an imaginary box around bug.
+* If the player's x axis is on left of bugboxleft and right of bugboxright, means the player is in middle of bugbox, ie.collided.
+* */
 Enemy.prototype.checkCollision = function () {
   var bugbox = {
     bugtop: this.y + 40,
