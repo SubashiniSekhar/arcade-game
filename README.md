@@ -11,4 +11,4 @@ Steps to play the game :
 
 2. Use arrow keys to move the character into desired direction.
 
-3. Aim to avoid collision with enemy bugs and reach water.
+3. Aim to avoid collision with enemy bugs and reach water to win.
