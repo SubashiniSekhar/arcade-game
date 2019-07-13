@@ -103,17 +103,25 @@ Player.prototype.checkForWall = function () {
   if (this.x === 0) {
     this.AtWall.leftEnd = true;
   }
-  else if (this.x === 400) {
+  else
+    this.AtWall.leftEnd = false;
+  if (this.x === 400) {
     this.AtWall.rightEnd = true;
   }
-  else if (this.y <= 40) {
+  else
+    this.AtWall.rightEnd = false;
+  if (this.y <= 40) {
     alert("Yay!! You won!!");
     this.AtWall.topEnd = true;
     this.resetPlayer();
   }
-  else if (this.y === 400) {
+  else
+    this.AtWall.topEnd = false;
+  if (this.y === 400) {
     this.AtWall.bottomEnd = true;
   }
+  else
+    this.AtWall.bottomEnd = false;
 }
 
 Player.prototype.resetPlayer = function () {
